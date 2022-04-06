@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Bus\RabbitMQ\" />
+    <Folder Include="Data\MongoDb\" />
+    <Folder Include="Data\Repositories\" />
+    <Folder Include="Data\SqlServer\Dapper\" />
+    <Folder Include="Data\SqlServer\EfCore\EntityConfigurations\" />
+    <Folder Include="Data\SqlServer\EfCore\Context\" />
+    <Folder Include="Logging\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.3" />
+    <PackageReference Include="Pluralize.NET" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceCenter.Application\ServiceCenter.Application.csproj" />
+    <ProjectReference Include="..\ServiceCenter.Common\ServiceCenter.Common.csproj" />
+  </ItemGroup>
+
+</Project>

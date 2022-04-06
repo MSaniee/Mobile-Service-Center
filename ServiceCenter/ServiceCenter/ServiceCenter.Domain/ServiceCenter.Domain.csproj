@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceCenter.Common\ServiceCenter.Common.csproj" />
+    <ProjectReference Include="..\ServiceCenter.Domain.Core\ServiceCenter.Domain.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceCenter.Application\ServiceCenter.Application.csproj" />
+    <ProjectReference Include="..\ServiceCenter.Common\ServiceCenter.Common.csproj" />
+    <ProjectReference Include="..\ServiceCenter.Infrastructure\ServiceCenter.Infrastructure.csproj" />
+    <ProjectReference Include="..\ServiceCenter.WebFramework\ServiceCenter.WebFramework.csproj" />
+  </ItemGroup>
+
+</Project>
