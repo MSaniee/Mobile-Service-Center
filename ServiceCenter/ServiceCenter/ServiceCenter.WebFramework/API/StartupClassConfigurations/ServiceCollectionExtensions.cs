@@ -1,94 +1,101 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ServiceCenter.Domain.Core.Settings.Site;
+using ServiceCenter.Infrastructure.Data.SqlServer.EfCore.Context;
 
-namespace ServiceCenter.WebFramework.API.StartupClassConfigurations
+namespace ServiceCenter.WebFramework.API.StartupClassConfigurations;
+
+public static class ServiceCollectionExtensions
 {
-    public static class ServiceCollectionExtensions
+    public static void AddDBContext(this IServiceCollection services, IConfiguration configuration)
     {
-        public static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
+        services.AddDbContext<ApplicationDbContext>(option =>
         {
-            //services.AddDbContext<ApplicationDbContext>(option =>
-            //{
-            //    option.UseSqlServer(configuration.GetConnectionString("SqlServer"));
-            //});
-        }
+            option.UseSqlServer(configuration.GetConnectionString("SqlServer"));
+        });
+    }
 
-        public static void AddMinimalMvc(this IServiceCollection services)
+    public static void AddConfigureSettings(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<SiteSettings>(configuration.GetSection(nameof(SiteSettings)));
+    }
+
+    public static void AddMinimalMvc(this IServiceCollection services)
+    {
+        //https://github.com/aspnet/Mvc/blob/release/2.2/src/Microsoft.AspNetCore.Mvc/MvcServiceCollectionExtensions.cs
+        services.AddMvcCore(options =>
         {
-            //https://github.com/aspnet/Mvc/blob/release/2.2/src/Microsoft.AspNetCore.Mvc/MvcServiceCollectionExtensions.cs
-            services.AddMvcCore(options =>
-            {
-                options.Filters.Add(new AuthorizeFilter());
-                options.EnableEndpointRouting = false;
-                //Like [ValidateAntiforgeryToken] attribute but dose not validatie for GET and HEAD http method
-                //You can ingore validate by using [IgnoreAntiforgeryToken] attribute
-                //Use this filter when use cookie
-                //options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            options.Filters.Add(new AuthorizeFilter());
+            options.EnableEndpointRouting = false;
+            //Like [ValidateAntiforgeryToken] attribute but dose not validatie for GET and HEAD http method
+            //You can ingore validate by using [IgnoreAntiforgeryToken] attribute
+            //Use this filter when use cookie
+            //options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 
-                //options.UseYeKeModelBinder();
-            })
-            .AddApiExplorer()
-            .AddAuthorization()
-            .AddRazorPages()
-            .AddFormatterMappings()
-            .AddDataAnnotations()
-            .AddControllersAsServices()
-            .AddNewtonsoftJson( /*options =>
+            //options.UseYeKeModelBinder();
+        })
+        .AddApiExplorer()
+        .AddAuthorization()
+        .AddFormatterMappings()
+        .AddDataAnnotations()
+        //.AddControllersAsServices()
+        .AddNewtonsoftJson( /*options =>
             {
                 options.Formatting = Newtonsoft.Json.Formatting.Indented;
                 options.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             }*/)
-            .AddCors(
-                options =>
-                {
-                    options.AddDefaultPolicy(builder =>
-                    {
-                        builder.WithOrigins(
-                            "https://localhost:44366/",
-                            "http://localhost:44366/")
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowAnyOrigin();
-                    });
-                })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0); //.Version_2_1
-
-        }
-
-        public static void AddCustomApiVersioning(this IServiceCollection services)
-        {
-            services.AddApiVersioning(options =>
+        .AddCors(
+            options =>
             {
-                //url segment => {version}
-                //با دو پراپرتی زیر ورژن دیفالت را تعیین می کنیم
-                options.AssumeDefaultVersionWhenUnspecified = true; //default => false;
-                options.DefaultApiVersion = new ApiVersion(1, 0); //v1.0 == v1
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins(
+                        "https://localhost:44366/",
+                        "http://localhost:44366/")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin();
+                });
+            })
+        .SetCompatibilityVersion(CompatibilityVersion.Version_3_0); //.Version_2_1
 
-                //به هدر اضافه میشود و گزارشی از ساپورت ورژن ای پی ای میدهد
-                options.ReportApiVersions = true;
+    }
 
-                ApiVersion.TryParse("1.0", out var version10);
-                ApiVersion.TryParse("1", out var version1);
-                var a = version10 == version1;
+    public static void AddCustomApiVersioning(this IServiceCollection services)
+    {
+        services.AddApiVersioning(options =>
+        {
+            //url segment => {version}
+            //با دو پراپرتی زیر ورژن دیفالت را تعیین می کنیم
+            options.AssumeDefaultVersionWhenUnspecified = true; //default => false;
+            options.DefaultApiVersion = new ApiVersion(1, 0); //v1.0 == v1
 
-                //مدلهای مختلف ادرسدهی مثال زده شده است:
-                options.ApiVersionReader = new QueryStringApiVersionReader("api-version");
-                // api/posts?api-version=1
+            //به هدر اضافه میشود و گزارشی از ساپورت ورژن ای پی ای میدهد
+            options.ReportApiVersions = true;
 
-                options.ApiVersionReader = new UrlSegmentApiVersionReader();
-                // api/v1/posts
+            ApiVersion.TryParse("1.0", out var version10);
+            ApiVersion.TryParse("1", out var version1);
+            var a = version10 == version1;
 
-                options.ApiVersionReader = new HeaderApiVersionReader(new[] { "Api-Version" });
-                // header => Api-Version : 1
+            //مدلهای مختلف ادرسدهی مثال زده شده است:
+            options.ApiVersionReader = new QueryStringApiVersionReader("api-version");
+            // api/posts?api-version=1
 
-                options.ApiVersionReader = new MediaTypeApiVersionReader();
+            options.ApiVersionReader = new UrlSegmentApiVersionReader();
+            // api/v1/posts
 
-                //options.ApiVersionReader = ApiVersionReader.Combine(new QueryStringApiVersionReader("api-version"), new UrlSegmentApiVersionReader())
-                // combine of [querystring] & [urlsegment]
-            });
-        }
+            options.ApiVersionReader = new HeaderApiVersionReader(new[] { "Api-Version" });
+            // header => Api-Version : 1
+
+            options.ApiVersionReader = new MediaTypeApiVersionReader();
+
+            //options.ApiVersionReader = ApiVersionReader.Combine(new QueryStringApiVersionReader("api-version"), new UrlSegmentApiVersionReader())
+            // combine of [querystring] & [urlsegment]
+        });
     }
 }
+

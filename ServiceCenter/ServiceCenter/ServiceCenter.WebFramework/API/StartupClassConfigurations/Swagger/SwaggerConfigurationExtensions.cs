@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using ServiceCenter.Application.Dtos;
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -49,14 +48,17 @@ namespace ServiceCenter.WebFramework.API.StartupClassConfigurations.Swagger
                 options.ExampleFilters();
 
                 //کد مربوط به اضافه کردن داکیومنت
-                var xmlDocPath = Path.Combine(AppContext.BaseDirectory, "TakSizeAPI.xml");
+                var xmlDocPath = Path.Combine(AppContext.BaseDirectory, "ServiceCenterAPI.xml");
                 //show controller XML comments like summary
                 options.IncludeXmlComments(xmlDocPath, true);
 
                 //options.DescribeAllEnumsAsStrings();
 
-                options.SwaggerDoc("v1", new OpenApiInfo() { Title = "TakSizeApi-v1", Version = "v1" });
-                options.SwaggerDoc("v2", new OpenApiInfo() { Title = "TakSizeApi-v2", Version = "v2" });
+                options.SwaggerDoc("v1", new OpenApiInfo() { Title = "ServiceCenterAPI-v1", Version = "v1" });
+                options.SwaggerDoc("v2", new OpenApiInfo() { Title = "ServiceCenterAPI-v2", Version = "v2" });
+
+                //Add Multilingual 
+                //options.OperationFilter<SwaggerLanguageHeader>();
 
                 #region Versioning
 
@@ -77,10 +79,13 @@ namespace ServiceCenter.WebFramework.API.StartupClassConfigurations.Swagger
                     return versions.Any(v => $"v{v.ToString()}" == docName);
                 });
 
+                //options.SchemaFilter<SwaggerIgnoreFilter>();
+                //options.OperationFilter<IgnorePropertyFilter>();
+
                 #endregion Versioning
             });
 
-            services.AddSwaggerExamplesFromAssemblyOf(typeof(BaseDto<,>));
+            //services.AddSwaggerExamplesFromAssemblyOf(typeof(JTokenRequestExample));
         }
 
         public static void UseSwaggerAndUI(this IApplicationBuilder app)
@@ -90,8 +95,8 @@ namespace ServiceCenter.WebFramework.API.StartupClassConfigurations.Swagger
             app.UseSwaggerUI(options =>
             {
                 options.DocExpansion(DocExpansion.None);
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "TakSizeApi-v1");
-                options.SwaggerEndpoint("/swagger/v2/swagger.json", "TakSizeApi-v2");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "ServiceCenterAPI-v1");
+                options.SwaggerEndpoint("/swagger/v2/swagger.json", "ServiceCenterAPI-v2");
             });
         }
     }

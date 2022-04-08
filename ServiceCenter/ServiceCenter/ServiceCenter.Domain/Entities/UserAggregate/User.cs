@@ -22,5 +22,6 @@ public class User : IdentityUser<Guid>, IEntity
 
     public ICollection<Receipt> UserReceipts { get; set; }
     public ICollection<Receipt> TechnicianReceipts { get; set; }
+    public ICollection<UserRefreshToken> UserRefreshTokens { get; set; }
 }
 

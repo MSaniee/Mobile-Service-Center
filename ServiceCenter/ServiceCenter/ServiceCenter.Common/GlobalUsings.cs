@@ -1,0 +1,9 @@
+﻿global using ServiceCenter.Common.StringTools;
+global using System;
+global using System.Collections.Generic;
+global using System.Globalization;
+global using System.Linq;
+global using System.Security.Claims;
+global using System.Security.Principal;
+global using System.Text;
+global using System.Threading.Tasks;

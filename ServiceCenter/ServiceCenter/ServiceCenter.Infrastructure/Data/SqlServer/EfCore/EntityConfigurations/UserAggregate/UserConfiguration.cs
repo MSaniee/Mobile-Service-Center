@@ -8,5 +8,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {       
         builder.Property(p => p.FullName).HasMaxLength(400);
         builder.Property(p => p.NationalCode).IsUnicode(false).HasMaxLength(50);
+
+        builder.HasMany(p => p.UserRefreshTokens).WithOne(p => p.User).HasForeignKey(p => p.UserId);
     }
 }
