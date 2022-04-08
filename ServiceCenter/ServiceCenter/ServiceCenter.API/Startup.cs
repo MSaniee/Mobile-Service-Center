@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using ServiceCenter.Domain.Core.Settings.Site;
 using ServiceCenter.WebFramework.API.StartupClassConfigurations;
 using ServiceCenter.WebFramework.API.StartupClassConfigurations.BackgroundServicesAndJobs;

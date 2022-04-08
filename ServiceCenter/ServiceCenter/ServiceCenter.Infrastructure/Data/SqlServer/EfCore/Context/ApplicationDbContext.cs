@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Reflection;
 
 namespace ServiceCenter.Infrastructure.Data.SqlServer.EfCore.Context;
 

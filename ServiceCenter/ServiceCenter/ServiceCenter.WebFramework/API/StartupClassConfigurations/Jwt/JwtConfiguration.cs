@@ -65,96 +65,94 @@ public static class JwtConfiguration
                         if (claimsIdentity.Claims?.Any() != true)
                             context.Fail("This token has no claims.");
 
-                        if (claimsIdentity.GetRolesNames().Contains("Personnel"))
-                        {
-                            var personnelRepository = context.HttpContext.RequestServices.GetRequiredService<IPersonnelRepository>();
-                            var personnelSecurityStamp = claimsIdentity.FindFirstValue(new ClaimsIdentityOptions().SecurityStampClaimType);
+                        //if (claimsIdentity.GetRolesNames().Contains("Personnel"))
+                        //{
+                        //    var personnelRepository = context.HttpContext.RequestServices.GetRequiredService<IPersonnelRepository>();
+                        //    var personnelSecurityStamp = claimsIdentity.FindFirstValue(new ClaimsIdentityOptions().SecurityStampClaimType);
 
-                            if (!personnelSecurityStamp.HasValue())
-                                context.Fail("This token has no secuirty stamp");
+                        //    if (!personnelSecurityStamp.HasValue())
+                        //        context.Fail("This token has no secuirty stamp");
 
-                            var personnelId = Convert.ToInt64(claimsIdentity.GetUserId<string>());
-                            var personnel = await personnelRepository.Table
-                                                 .FirstOrDefaultAsync(p => p.Id == personnelId, context.HttpContext.RequestAborted);
+                        //    var personnelId = Convert.ToInt64(claimsIdentity.GetUserId<string>());
+                        //    var personnel = await personnelRepository.Table
+                        //                         .FirstOrDefaultAsync(p => p.Id == personnelId, context.HttpContext.RequestAborted);
 
-                            if (personnel.SecurityStamp != personnelSecurityStamp)
-                            {
-                                context.Fail("Token secuirty stamp is not valid.");
-                                context.HttpContext.Response.Headers.Add("Message", "Token secuirty stamp is not valid.");
-                            }
+                        //    if (personnel.SecurityStamp != personnelSecurityStamp)
+                        //    {
+                        //        context.Fail("Token secuirty stamp is not valid.");
+                        //        context.HttpContext.Response.Headers.Add("Message", "Token secuirty stamp is not valid.");
+                        //    }
 
-                            if (!personnel.IsActive)
-                            {
-                                var localizer = context.HttpContext.RequestServices.GetRequiredService<IServiceLocalizer>();
-                                context.Fail(localizer[Keys.UserIsNotActive]);
-                            }
+                        //    if (!personnel.IsActive)
+                        //    {
+                        //        var localizer = context.HttpContext.RequestServices.GetRequiredService<IServiceLocalizer>();
+                        //        context.Fail(localizer[Keys.UserIsNotActive]);
+                        //    }
 
-                            await personnelRepository.UpdateLastLoginDateAsync(personnel, context.HttpContext.RequestAborted);
-                        }
-                        else
-                        {
-                            var userRepository = context.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
+                        //    await personnelRepository.UpdateLastLoginDateAsync(personnel, context.HttpContext.RequestAborted);
+                        //}
+                        //else
+                        //{
+                        //    var userRepository = context.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
 
-                            IServiceLocalizer localizer = context.HttpContext.RequestServices.GetRequiredService<IServiceLocalizer>();
+                        //    string userSecurityStamp = claimsIdentity.FindFirstValue(new ClaimsIdentityOptions().SecurityStampClaimType);
 
-                            string userSecurityStamp = claimsIdentity.FindFirstValue(new ClaimsIdentityOptions().SecurityStampClaimType);
+                        //    if (!userSecurityStamp.HasValue())
+                        //        context.Fail("This token has no secuirty stamp");
 
-                            if (!userSecurityStamp.HasValue())
-                                context.Fail("This token has no secuirty stamp");
+                        //    //Find user and token from database and perform your custom validation
+                        //    var userId = claimsIdentity.GetUserId<string>();
+                        //    var user = await userRepository.Table
+                        //                         .CacheInSecondLevel()
+                        //                         .FirstOrDefaultAsync(u => u.Id == Guid.Parse(userId), context.HttpContext.RequestAborted);
 
-                            //Find user and token from database and perform your custom validation
-                            var userId = claimsIdentity.GetUserId<string>();
-                            var user = await userRepository.Table
-                                                 .CacheInSecondLevel()
-                                                 .FirstOrDefaultAsync(u => u.Id == Guid.Parse(userId), context.HttpContext.RequestAborted);
+                        //    if (user.SecurityStamp != userSecurityStamp)
+                        //    {
+                        //        context.Fail("Token secuirty stamp is not valid.");
+                        //        context.HttpContext.Response.Headers.Add("Message", "Token secuirty stamp is not valid.");
+                        //    }
+                        //    //var validatedUser = await signInManager.ValidateSecurityStampAsync(context.Principal);
+                        //    //if (validatedUser == null)
+                        //    //{
+                        //    //    context.Fail("Token secuirty stamp is not valid.");
+                        //    //    context.HttpContext.Response.Headers.Add("Message", "Token secuirty stamp is not valid.");
+                        //    //}
+                        //    else if (user.IsDeleted)
+                        //    {
+                        //        context.Fail(Keys.UserIsDeleted);
+                        //        context.HttpContext.Response.Headers.Add("Message", Keys.UserIsDeleted);
+                        //    }
+                        //    else if (!user.IsActive)
+                        //    {
+                        //        context.Fail(localizer[Keys.UserIsNotActive]);
+                        //        context.HttpContext.Response.Headers.Add("Message", Keys.UserIsNotActive);
+                        //    }
 
-                            if (user.SecurityStamp != userSecurityStamp)
-                            {
-                                context.Fail("Token secuirty stamp is not valid.");
-                                context.HttpContext.Response.Headers.Add("Message", "Token secuirty stamp is not valid.");
-                            }
-                            //var validatedUser = await signInManager.ValidateSecurityStampAsync(context.Principal);
-                            //if (validatedUser == null)
-                            //{
-                            //    context.Fail("Token secuirty stamp is not valid.");
-                            //    context.HttpContext.Response.Headers.Add("Message", "Token secuirty stamp is not valid.");
-                            //}
-                            else if (user.IsDeleted)
-                            {
-                                context.Fail(Keys.UserIsDeleted);
-                                context.HttpContext.Response.Headers.Add("Message", Keys.UserIsDeleted);
-                            }
-                            else if (!user.IsActive)
-                            {
-                                context.Fail(localizer[Keys.UserIsNotActive]);
-                                context.HttpContext.Response.Headers.Add("Message", Keys.UserIsNotActive);
-                            }
+                        //    long? companyId = claimsIdentity.GetCompanyID();
+                        //    Channel<SocialItemMessage> channel = context.HttpContext.RequestServices.GetRequiredService<Channel<SocialItemMessage>>();
+                        //    SocialItemMessage message;
 
-                            long? companyId = claimsIdentity.GetCompanyID();
-                            Channel<SocialItemMessage> channel = context.HttpContext.RequestServices.GetRequiredService<Channel<SocialItemMessage>>();
-                            SocialItemMessage message;
+                        //    if (companyId is null)
+                        //    {
+                        //        message = new()
+                        //        {
+                        //            Type = SocialItemMessageType.UpdateUserLastLoginDate,
+                        //            UserId = Guid.Parse(userId)
+                        //        };
+                        //    }
+                        //    else
+                        //    {
+                        //        message = new()
+                        //        {
+                        //            Type = SocialItemMessageType.UpdateUserAndCompanyLastLoginDate,
+                        //            UserId = Guid.Parse(userId),
+                        //            CompanyId = companyId
+                        //        };
+                        //    }
 
-                            if (companyId is null)
-                            {
-                                message = new()
-                                {
-                                    Type = SocialItemMessageType.UpdateUserLastLoginDate,
-                                    UserId = Guid.Parse(userId)
-                                };
-                            }
-                            else
-                            {
-                                message = new()
-                                {
-                                    Type = SocialItemMessageType.UpdateUserAndCompanyLastLoginDate,
-                                    UserId = Guid.Parse(userId),
-                                    CompanyId = companyId
-                                };
-                            }
-
-                            await channel.Writer.WriteAsync(message, context.HttpContext.RequestAborted);
-                            //await userRepository.UpdateLastLoginDateAsync(user, context.HttpContext.RequestAborted);
-                        }
+                        //    await channel.Writer.WriteAsync(message, context.HttpContext.RequestAborted);
+                        //    //await userRepository.UpdateLastLoginDateAsync(user, context.HttpContext.RequestAborted);
+                        //}
 
                     }
                 };

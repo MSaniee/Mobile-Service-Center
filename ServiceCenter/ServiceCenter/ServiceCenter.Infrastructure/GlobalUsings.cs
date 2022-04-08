@@ -6,6 +6,5 @@ global using ServiceCenter.Domain.Entities.UserAggregate;
 global using ServiceCenter.Infrastructure.Data.SqlServer.EfCore.Tools;
 global using System;
 global using System.Linq;
-global using System.Reflection;
 global using System.Threading;
 global using System.Threading.Tasks;
