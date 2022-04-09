@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceCenter.WebFramework.API.Filters;
 
-namespace ServiceCenter.WebFramework.API.Bases
+namespace ServiceCenter.WebFramework.API.Bases;
+
+[ApiController]
+[Authorize]
+[ApiResultFilter]
+//[ApiVersion("1")]
+[Route("api/v{version:apiVersion}/[area]/[controller]/[action]")]
+public class BaseController : ControllerBase
 {
-    [ApiController]
-    [Authorize]
-    [ApiResultFilter]
-    //[ApiVersion("1")]
-    [Route("api/v{version:apiVersion}/[area]/[controller]/[action]")]
-    public class BaseController : ControllerBase
-    {
-    }
 }
+

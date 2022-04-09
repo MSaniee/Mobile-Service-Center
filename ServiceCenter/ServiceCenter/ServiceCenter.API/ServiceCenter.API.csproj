@@ -2,10 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>C:\Users\Mohsen\source\repos\ServiceCenter\ServiceCenter\ServiceCenter\ServiceCenter.API\bin\Debug\net6.0\ServiceCenterAPI.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\" />
+    <Folder Include="Areas\Admin\" />
   </ItemGroup>
 
   <ItemGroup>

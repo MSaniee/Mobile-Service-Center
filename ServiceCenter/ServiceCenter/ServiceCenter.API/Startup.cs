@@ -1,3 +1,4 @@
+using ElmahCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -5,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ServiceCenter.Domain.Core.Settings.Site;
 using ServiceCenter.WebFramework.API.StartupClassConfigurations;
 using ServiceCenter.WebFramework.API.StartupClassConfigurations.BackgroundServicesAndJobs;
+using ServiceCenter.WebFramework.API.StartupClassConfigurations.Elmah;
 using ServiceCenter.WebFramework.API.StartupClassConfigurations.Identity;
 using ServiceCenter.WebFramework.API.StartupClassConfigurations.Jwt;
 using ServiceCenter.WebFramework.API.StartupClassConfigurations.MediatR;
@@ -38,6 +40,8 @@ public class Startup
 
         services.AddControllers();
 
+        services.AddElmah(Configuration, _siteSettings);
+
         services.AddCustomMediatR();
 
         services.AddJwtAuthentication(_siteSettings.JwtSettings);
@@ -70,7 +74,7 @@ public class Startup
 
         app.UseAuthorization();
 
-        //app.UseElmah();
+        app.UseElmah();
 
         app.UseSwaggerAndUI();
 

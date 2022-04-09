@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-
-namespace ServiceCenter.Common.Resources
-{
+namespace ServiceCenter.Common.Resources {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -19,95 +19,97 @@ namespace ServiceCenter.Common.Resources
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Memos
-    {
-
+    public class Memos {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Memos()
-        {
+        internal Memos() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if (object.ReferenceEquals(resourceMan, null))
-                {
+        public static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ServiceCenter.Common.Resources.Memos", typeof(Memos).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        public static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدفعالسازی پیش از این ارسال شده است لطفا {0} دیگر دوباره امتحان کنید.
+        /// </summary>
+        public static string ActivationCodeIsSended {
+            get {
+                return ResourceManager.GetString("ActivationCodeIsSended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدفعالسازی با موفقیت ارسال شد.
+        /// </summary>
+        public static string ActivationCodeSentSuccessfully {
+            get {
+                return ResourceManager.GetString("ActivationCodeSentSuccessfully", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to کدملی وارد شده صحیح نیست.
         /// </summary>
-        public static string InvalidNationalIdEntered
-        {
-            get
-            {
+        public static string InvalidNationalIdEntered {
+            get {
                 return ResourceManager.GetString("InvalidNationalIdEntered", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to شماره تلفن همراه وارد شده صحیح نیست.
         /// </summary>
-        public static string InvalidPhoneNumberEntered
-        {
-            get
-            {
+        public static string InvalidPhoneNumberEntered {
+            get {
                 return ResourceManager.GetString("InvalidPhoneNumberEntered", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to نام کاربری وارد شده صحیح نیست.
         /// </summary>
-        public static string InvalidUserNameEntered
-        {
-            get
-            {
+        public static string InvalidUserNameEntered {
+            get {
                 return ResourceManager.GetString("InvalidUserNameEntered", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to کاربر مورد نظر یافت نشد.
         /// </summary>
-        public static string UserNotFound
-        {
-            get
-            {
+        public static string UserNotFound {
+            get {
                 return ResourceManager.GetString("UserNotFound", resourceCulture);
             }
         }

@@ -5,3 +5,5 @@ global using System.Linq;
 global using System.Linq.Expressions;
 global using System.Threading;
 global using System.Threading.Tasks;
+global using ServiceCenter.Application.Services.Base;
+global using ServiceCenter.Application.Utilities.Exceptions;

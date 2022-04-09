@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActivationCodeIsSended" xml:space="preserve">
+    <value>کدفعالسازی پیش از این ارسال شده است لطفا {0} دیگر دوباره امتحان کنید</value>
+  </data>
+  <data name="ActivationCodeSentSuccessfully" xml:space="preserve">
+    <value>کدفعالسازی با موفقیت ارسال شد</value>
+  </data>
   <data name="InvalidNationalIdEntered" xml:space="preserve">
     <value>کدملی وارد شده صحیح نیست</value>
   </data>

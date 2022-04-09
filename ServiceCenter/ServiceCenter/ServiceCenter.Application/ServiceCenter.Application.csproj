@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Features\UserAggregate\ActivationCodes\Queries\" />
     <Folder Include="Interfaces\BackgroundJobs\" />
     <Folder Include="Interfaces\BackgroundServices\" />
     <Folder Include="Interfaces\Services\" />
@@ -14,7 +15,6 @@
     <Folder Include="Mapping\CustomMappings\" />
     <Folder Include="Utilities\Constants\" />
     <Folder Include="Validations\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

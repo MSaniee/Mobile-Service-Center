@@ -2,17 +2,15 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using Serilog;
 using ServiceCenter.Domain.Enums;
 using ServiceCenter.Domain.Exceptions;
 using ServiceCenter.WebFramework.API.Bases;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ServiceCenter.WebFramework.API.StartupClassConfigurations.Middlewares
@@ -29,11 +27,11 @@ namespace ServiceCenter.WebFramework.API.StartupClassConfigurations.Middlewares
     {
         private readonly RequestDelegate _next;
         private readonly IWebHostEnvironment _env;
-        private readonly ILogger _logger;
+        private readonly ILogger<CustomExceptionHandlerMiddleware> _logger;
 
         public CustomExceptionHandlerMiddleware(RequestDelegate next,
             IWebHostEnvironment env,
-            ILogger logger)
+            ILogger<CustomExceptionHandlerMiddleware> logger)
         {
             _next = next;
             _env = env;
@@ -53,7 +51,8 @@ namespace ServiceCenter.WebFramework.API.StartupClassConfigurations.Middlewares
             }
             catch (AppException exception)
             {
-                _logger.Error(exception, exception.Message);
+                //_logger.Error(exception, exception.Message);
+                _logger.LogError(exception, exception.Message);
                 httpStatusCode = exception.HttpStatusCode;
                 apiStatusCode = exception.ApiStatusCode;
 
@@ -83,20 +82,20 @@ namespace ServiceCenter.WebFramework.API.StartupClassConfigurations.Middlewares
             }
             catch (SecurityTokenExpiredException exception)
             {
-                _logger.Error(exception, exception.Message);
+                _logger.LogError(exception, exception.Message);
                 SetUnAuthorizeResponse(exception);
                 apiStatusCode = ApiResultStatusCode.ExpiredToken;
                 await WriteToResponseAsync();
             }
             catch (UnauthorizedAccessException exception)
             {
-                _logger.Error(exception, exception.Message);
+                _logger.LogError(exception, exception.Message);
                 SetUnAuthorizeResponse(exception);
                 await WriteToResponseAsync();
             }
             catch (Exception exception)
             {
-                _logger.Error(exception, exception.Message);
+                _logger.LogError(exception, exception.Message);
 
                 if (_env.IsDevelopment())
                 {
