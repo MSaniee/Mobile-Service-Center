@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.UnitTests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.API.IntegrationTests", "ServiceCenter\ServiceCenter.API.IntegrationTests\ServiceCenter.API.IntegrationTests.csproj", "{EC4A91B8-6FB0-4049-B085-573B8DD40AA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.Website", "ServiceCenter\ServiceCenter.Website\ServiceCenter.Website.csproj", "{6DEE511A-A8FE-4403-85A5-811A461FDCB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{EC4A91B8-6FB0-4049-B085-573B8DD40AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC4A91B8-6FB0-4049-B085-573B8DD40AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC4A91B8-6FB0-4049-B085-573B8DD40AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DEE511A-A8FE-4403-85A5-811A461FDCB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DEE511A-A8FE-4403-85A5-811A461FDCB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DEE511A-A8FE-4403-85A5-811A461FDCB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DEE511A-A8FE-4403-85A5-811A461FDCB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{AEED412C-E2A1-44B6-AA19-11B05D2E24D2} = {336FC089-3C43-428B-8EB4-AC7B15E40F73}
 		{A226DA4A-FCA7-4B6F-B364-3695842B3CAD} = {D11EBDC3-FBFA-4D96-B7D2-7910A165558C}
 		{EC4A91B8-6FB0-4049-B085-573B8DD40AA9} = {D11EBDC3-FBFA-4D96-B7D2-7910A165558C}
+		{6DEE511A-A8FE-4403-85A5-811A461FDCB7} = {C8CAD508-FE43-4E71-95B1-B2A6F0D6C906}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11D5AE97-BAB8-479E-8C2A-9C4A92DA0637}
