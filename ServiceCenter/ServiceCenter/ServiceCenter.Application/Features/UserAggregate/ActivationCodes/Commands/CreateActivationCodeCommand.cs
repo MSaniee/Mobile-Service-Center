@@ -66,15 +66,7 @@ public class CreateActivationCodeCommandHandler : IRequestHandler<CreateActivati
             return result;
         }
 
-        activationCode.ExpireDate = activationCode.Step switch
-        {
-            0 => dtNow.AddSeconds(60),
-            1 => dtNow.AddSeconds(90),
-            2 => dtNow.AddSeconds(120),
-            3 => dtNow.AddSeconds(300),
-            4 => dtNow.AddSeconds(3600),
-            _ => dtNow.AddHours(12)
-        };
+        activationCode.SetExpireDate(activationCode.Step);
 
         string expirationRemainingTime = (activationCode.ExpireDate - dtNow).ToString(@"hh\:mm\:ss");
 
