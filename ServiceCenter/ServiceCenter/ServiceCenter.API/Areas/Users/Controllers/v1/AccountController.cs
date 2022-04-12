@@ -1,5 +1,7 @@
 ﻿using ServiceCenter.Application.Dtos.ActivationCodes;
+using ServiceCenter.Application.Dtos.Users;
 using ServiceCenter.Application.Features.UserAggregate.ActivationCodes.Commands;
+using ServiceCenter.Application.Features.UserAggregate.Users;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,5 +34,20 @@ public class AccountController : BaseController
 
         return await _mediator.Send(command, cancellationToken);
     }
+
+    /// <summary>
+    /// ورود کاربر
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<ApiResult<UserLoginResultDto>> Login(UserLoginDto dto, CancellationToken cancellationToken)
+    {
+        RegisterOrLoginUserCommand command = new(dto.PhoneNumber, dto.Code);
+
+        return await _mediator.Send(command, cancellationToken);
+    }
+
 }
 

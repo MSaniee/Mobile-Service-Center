@@ -1,9 +1,19 @@
 ﻿@page "/"
+@page "/index"
+@using ServiceCenter.Website.Components
 
-<PageTitle>Index</PageTitle>
+<Home Title="Welcome to the Mobile Service Center application"
+      @attributes="AdditionalAttributes">
+      <PleaseLoginContent>
+          Please login or register...!
+      </PleaseLoginContent>  
+  </Home>
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code{
+    public Dictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, object>
+    {
+        { "src", "/assets/homePic.jpg" },
+        { "alt", "products image for the Home component" }
+    };
+}

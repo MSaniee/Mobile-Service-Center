@@ -136,7 +136,7 @@ namespace ServiceCenter.Infrastructure.Migrations
                     b.Property<string>("FaultDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IMEI")
+                    b.Property<string>("Imei")
                         .HasMaxLength(15)
                         .IsUnicode(false)
                         .HasColumnType("varchar(15)");
@@ -147,7 +147,10 @@ namespace ServiceCenter.Infrastructure.Migrations
                     b.Property<string>("MobileModel")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("TechnicianId")
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("TechnicianId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UserId")
@@ -296,6 +299,9 @@ namespace ServiceCenter.Infrastructure.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -398,9 +404,7 @@ namespace ServiceCenter.Infrastructure.Migrations
                 {
                     b.HasOne("ServiceCenter.Domain.Entities.UserAggregate.User", "Technician")
                         .WithMany("TechnicianReceipts")
-                        .HasForeignKey("TechnicianId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("TechnicianId");
 
                     b.HasOne("ServiceCenter.Domain.Entities.UserAggregate.User", "User")
                         .WithMany("UserReceipts")

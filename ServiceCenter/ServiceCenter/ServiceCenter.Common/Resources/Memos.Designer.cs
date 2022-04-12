@@ -70,11 +70,47 @@ namespace ServiceCenter.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کدفعالسازی یافت نشد.
+        /// </summary>
+        public static string ActivationCodeNotFound {
+            get {
+                return ResourceManager.GetString("ActivationCodeNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کدفعالسازی با موفقیت ارسال شد.
         /// </summary>
         public static string ActivationCodeSentSuccessfully {
             get {
                 return ResourceManager.GetString("ActivationCodeSentSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدفعالسازی منقضی شده است.
+        /// </summary>
+        public static string CodeHasExpired {
+            get {
+                return ResourceManager.GetString("CodeHasExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدفالسازی صحیح نیست.
+        /// </summary>
+        public static string CodeIsIncorrect {
+            get {
+                return ResourceManager.GetString("CodeIsIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدفعالسازی پیش از این استفاده شده است.
+        /// </summary>
+        public static string CodeUsed {
+            get {
+                return ResourceManager.GetString("CodeUsed", resourceCulture);
             }
         }
         
@@ -102,6 +138,15 @@ namespace ServiceCenter.Common.Resources {
         public static string InvalidUserNameEntered {
             get {
                 return ResourceManager.GetString("InvalidUserNameEntered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حساب کاربری شما غیرفعال است.
+        /// </summary>
+        public static string UserIsNotActive {
+            get {
+                return ResourceManager.GetString("UserIsNotActive", resourceCulture);
             }
         }
         

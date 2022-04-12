@@ -25,11 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceCenter.WebFramework"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D11EBDC3-FBFA-4D96-B7D2-7910A165558C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.UnitTests", "ServiceCenter\ServiceCenter.UnitTests\ServiceCenter.UnitTests.csproj", "{A226DA4A-FCA7-4B6F-B364-3695842B3CAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceCenter.UnitTests", "ServiceCenter\ServiceCenter.UnitTests\ServiceCenter.UnitTests.csproj", "{A226DA4A-FCA7-4B6F-B364-3695842B3CAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.API.IntegrationTests", "ServiceCenter\ServiceCenter.API.IntegrationTests\ServiceCenter.API.IntegrationTests.csproj", "{EC4A91B8-6FB0-4049-B085-573B8DD40AA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceCenter.API.IntegrationTests", "ServiceCenter\ServiceCenter.API.IntegrationTests\ServiceCenter.API.IntegrationTests.csproj", "{EC4A91B8-6FB0-4049-B085-573B8DD40AA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.Website", "ServiceCenter\ServiceCenter.Website\ServiceCenter.Website.csproj", "{6DEE511A-A8FE-4403-85A5-811A461FDCB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceCenter.Website", "ServiceCenter\ServiceCenter.Website\ServiceCenter.Website.csproj", "{6DEE511A-A8FE-4403-85A5-811A461FDCB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using ServiceCenter.Domain.Entities.ReceiptAggregate;
+using ServiceCenter.Domain.Enums;
 
 namespace ServiceCenter.Domain.Entities.UserAggregate;
 
@@ -19,7 +20,7 @@ public class User : IdentityUser<Guid>, IEntity
     public DateTime? LastLoginDate { get; set; }
 
     public bool IsActive { get; set; }
-
+    public UserType Type { get; set; }
     public ICollection<Receipt> UserReceipts { get; set; }
     public ICollection<Receipt> TechnicianReceipts { get; set; }
     public ICollection<UserRefreshToken> UserRefreshTokens { get; set; }

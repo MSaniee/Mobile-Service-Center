@@ -8,10 +8,8 @@
     <Folder Include="Features\UserAggregate\ActivationCodes\Queries\" />
     <Folder Include="Interfaces\BackgroundJobs\" />
     <Folder Include="Interfaces\BackgroundServices\" />
-    <Folder Include="Interfaces\Services\" />
     <Folder Include="BackgroundJobs\" />
     <Folder Include="BackgroundServices\" />
-    <Folder Include="DataInitializer\" />
     <Folder Include="Mapping\CustomMappings\" />
     <Folder Include="Utilities\Constants\" />
     <Folder Include="Validations\" />
@@ -19,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.17.0" />
   </ItemGroup>
