@@ -49,9 +49,11 @@ public class ReceiptsController : BaseController
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [HttpPost]
+    [AllowAnonymous]
     public async Task<ApiResult<List<ReceiptDto>>> GetAll(Pagable pagable, CancellationToken cancellationToken)
     {
-        Guid? userId = User.Identity.GetGuidUserId();
+        //Guid? userId = User.Identity.GetGuidUserId();
+        Guid? userId = Guid.Parse("617c75b4-86ba-ec11-9801-50e549189de0");
 
         GetReceiptsQuery query = new(pagable, (Guid)userId);
 
