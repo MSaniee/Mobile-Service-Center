@@ -1,5 +1,7 @@
 ﻿<h3>Receipts</h3>
 @page "/Receipts"
+@using ServiceCenter.Website.Components.Receipts
+
 <div class="row">
     <div class="col-md-10">
         @*Place for search and sort*@
@@ -10,7 +12,7 @@
 </div>
 <div class="row">
     <div class="col">
-        @*Place for products*@
+        <ReceiptTable Receipts="ReceiptList" />
     </div>
 </div>
 <div class="row">

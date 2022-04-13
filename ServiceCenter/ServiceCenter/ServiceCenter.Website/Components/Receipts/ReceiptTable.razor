@@ -1,0 +1,49 @@
+﻿@if (Receipts.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">IMEI</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Model</th>
+                <th scope="col">Fault Description</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var receipt in Receipts)
+            {
+                <tr>
+                    @*<td>
+                        <img src="@receipt.ImageUrl" alt="product image" style="width:100px;" />
+                    </td>*@
+                    <td class="align-middle">
+                        @receipt.Imei
+                    </td>
+                    <td class="align-middle">
+                        @receipt.MobileBrand.ToString()
+                    </td>
+                    <td class="align-middle">
+                        @receipt.MobileModel
+                    </td>
+                    <td class="align-middle">
+                        @receipt.FaultDescription
+                    </td>
+                    <td class="align-middle">
+                        <button type="button" class="btn btn-info">Update</button>
+                    </td>
+                    <td class="align-middle">
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+             }
+            </tbody>
+    </table>
+}
+else
+{
+    <span>
+        Loading receipts...
+    </span>
+}
