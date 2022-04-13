@@ -30,4 +30,24 @@ public partial class Receipts
         ReceiptList = pagingResponse.Items;
         MetaData = pagingResponse.MetaData;
     }
+
+    private async Task SearchChanged(string searchTerm)
+    {
+        if(searchTerm.Length > 2)
+        {
+            Console.WriteLine(searchTerm);
+
+            Pagable.Page = 1;
+            Pagable.Search = searchTerm;
+
+            await GetReceipts();
+        }
+        else if(searchTerm.Length == 0)
+        {
+            Pagable.Page = 1;
+            Pagable.Search = null;
+
+            await GetReceipts();
+        }
+    }
 }
