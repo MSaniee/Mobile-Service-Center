@@ -21,6 +21,8 @@ namespace ServiceCenter.Domain.Core.Utilities.PagesSettings
         /// </summary>
         [StringLength(100, MinimumLength = 2, ErrorMessage = "مقدار جستجو باید بین 2 تا 100 کارکاتر باشد")]
         public string Search { get; set; } = "";
+
+        public string OrderBy { get; set; } = "name";
     }
 
     public static class PagableExtension

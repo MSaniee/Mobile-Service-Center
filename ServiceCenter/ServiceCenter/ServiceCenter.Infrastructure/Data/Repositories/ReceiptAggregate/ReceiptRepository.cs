@@ -19,6 +19,7 @@ public class ReceiptRepository : Repository<Receipt>, IReceiptRepository, IScope
 
         => TableNoTracking.Where(r => r.UserId == userId)
                           .Search(pagable.Search)
+                          .Sort(pagable.OrderBy)
                           .ProjectToType<ReceiptDto>()
                           .ToPagedListAsync(pagable, cancellationToken);
 }

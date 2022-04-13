@@ -50,4 +50,11 @@ public partial class Receipts
             await GetReceipts();
         }
     }
+
+    private async Task SortChanged(string orderBy)
+    {
+        Console.WriteLine(orderBy);
+        Pagable.OrderBy = orderBy;
+        await GetReceipts();
+    }
 }
