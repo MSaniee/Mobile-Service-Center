@@ -21,20 +21,4 @@ public class ReceiptRepository : Repository<Receipt>, IReceiptRepository, IScope
                           .Search(pagable.Search)
                           .ProjectToType<ReceiptDto>()
                           .ToPagedListAsync(pagable, cancellationToken);
-
-
-
-}
-
-public static class RepositoryProductExtensions
-{
-    public static IQueryable<Receipt> Search(this IQueryable<Receipt> receipts, string searchTerm)
-    {
-        if (!searchTerm.HasValue()) return receipts;
-
-        var lowerCaseSearchTerm = searchTerm.Trim().ToLower();
-
-        return receipts.Where(p => p.Imei.ToLower().Contains(lowerCaseSearchTerm) ||
-                                   p.MobileModel.ToLower().Contains(lowerCaseSearchTerm));
-    }
 }
