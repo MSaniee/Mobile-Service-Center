@@ -5,6 +5,7 @@ using ServiceCenter.Application.Features.ReveiptsAggregate.Receipts.Commands;
 using ServiceCenter.Application.Features.ReveiptsAggregate.Receipts.Queries;
 using ServiceCenter.Common.IdentityTools;
 using ServiceCenter.Domain.Core.Utilities.PagesSettings;
+using ServiceCenter.WebFramework.API.Utilities.PageSettings;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -59,7 +60,7 @@ public class ReceiptsController : BaseController
         GetReceiptsQuery query = new(pagable, (Guid)userId);
         var result = await _mediator.Send(query, cancellationToken);
 
-        Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(result.Data.MetaData));
+        Response.AddPaginationToHeader(result.Data.MetaData);
 
         return result;
     }

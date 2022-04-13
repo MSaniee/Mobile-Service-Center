@@ -1,5 +1,6 @@
 ﻿using ServiceCenter.Application.Dtos.Receipts;
 using ServiceCenter.Domain.Core.Utilities.PagesSettings;
+using ServiceCenter.Website.Features;
 using ServiceCenter.Website.Interfaces;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -16,27 +17,29 @@ public class ReceiptService : IReceiptService
         _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
     }
 
-    public async Task<List<ReceiptDto>> GetReceipts()
+    public async Task<PagingResponse<ReceiptDto>> GetReceipts(Pagable pagable)
     {
-        Pagable pagable = new()
-        {
-            Page = 1,
-            PageSize = 20,
-            Search = null
-        };
-
-        var response = await _client.PostAsJsonAsync("v1/Users/Receipts/GetAll", pagable);
-
-        //if(response.StatusCode == HttpStatusCode.OK)
-
-        var result = await response.Content.ReadAsAsync<ApiResult<List<ReceiptDto>>>();
+        HttpResponseMessage response = await _client.PostAsJsonAsync("v1/Users/Receipts/GetAll", pagable);
 
         if (!response.IsSuccessStatusCode)
         {
             throw new ApplicationException(response.Content.ToString());
         }
 
-        return result.Data;
+        var result = await response.Content.ReadAsAsync<ApiResult<List<ReceiptDto>>>();
+
+        if (!result.IsSuccess)
+        {
+            throw new ApplicationException(result.Message);
+        }
+
+        PagingResponse<ReceiptDto> pagingResponse = new()
+        {
+            Items = result.Data,
+            MetaData = JsonSerializer.Deserialize<MetaData>(response.Headers.GetValues("X-Pagination").First(), _options)
+        };
+
+        return pagingResponse;
     }
 }
 

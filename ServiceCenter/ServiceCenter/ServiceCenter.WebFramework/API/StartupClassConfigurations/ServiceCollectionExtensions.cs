@@ -58,7 +58,8 @@ public static class ServiceCollectionExtensions
                         "http://localhost:44366/")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowAnyOrigin();
+                    .AllowAnyOrigin()
+                    .WithExposedHeaders("X-Pagination");
                 });
             })
         .SetCompatibilityVersion(CompatibilityVersion.Version_3_0); //.Version_2_1
