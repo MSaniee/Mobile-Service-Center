@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using Newtonsoft.Json;
 using ServiceCenter.Application.Dtos.Receipts;
 using ServiceCenter.Application.Features.ReveiptsAggregate.Receipts.Commands;
 using ServiceCenter.Application.Features.ReveiptsAggregate.Receipts.Queries;
@@ -50,14 +51,17 @@ public class ReceiptsController : BaseController
     /// <returns></returns>
     [HttpPost]
     [AllowAnonymous]
-    public async Task<ApiResult<List<ReceiptDto>>> GetAll(Pagable pagable, CancellationToken cancellationToken)
+    public async Task<ApiResult<PagedList<ReceiptDto>>> GetAll(Pagable pagable, CancellationToken cancellationToken)
     {
         //Guid? userId = User.Identity.GetGuidUserId();
         Guid? userId = Guid.Parse("617c75b4-86ba-ec11-9801-50e549189de0");
 
         GetReceiptsQuery query = new(pagable, (Guid)userId);
+        var result = await _mediator.Send(query, cancellationToken);
 
-        return await _mediator.Send(query, cancellationToken);
+        Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(result.Data.MetaData));
+
+        return result;
     }
 }
 

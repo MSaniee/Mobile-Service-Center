@@ -8,9 +8,9 @@ namespace ServiceCenter.Application.Features.ReveiptsAggregate.Receipts.Queries;
 public record GetReceiptsQuery(
         Pagable Pagable,
         Guid UserId)
-        : IRequest<SResult<List<ReceiptDto>>>;
+        : IRequest<SResult<PagedList<ReceiptDto>>>;
 
-public class GetReceiptsQueryHandler : IRequestHandler<GetReceiptsQuery, SResult<List<ReceiptDto>>>
+public class GetReceiptsQueryHandler : IRequestHandler<GetReceiptsQuery, SResult<PagedList<ReceiptDto>>>
 {
     private readonly IReceiptRepository _receiptRepo;
 
@@ -20,7 +20,7 @@ public class GetReceiptsQueryHandler : IRequestHandler<GetReceiptsQuery, SResult
         _receiptRepo = receiptRepo.ThrowIfNull();
     }
 
-    public async Task<SResult<List<ReceiptDto>>> Handle(GetReceiptsQuery request, CancellationToken cancellationToken)
+    public async Task<SResult<PagedList<ReceiptDto>>> Handle(GetReceiptsQuery request, CancellationToken cancellationToken)
     {
         return await _receiptRepo.GetReceipts(request.UserId, request.Pagable, cancellationToken);
     }
