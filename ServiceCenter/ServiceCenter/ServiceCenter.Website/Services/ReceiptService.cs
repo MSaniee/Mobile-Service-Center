@@ -41,5 +41,22 @@ public class ReceiptService : IReceiptService
 
         return pagingResponse;
     }
+
+    public async Task CreateReceipt(ReceiptDto dto)
+    {
+        HttpResponseMessage response = await _client.PostAsJsonAsync("v1/Users/Receipts", dto);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new ApplicationException(response.Content.ToString());
+        }
+
+        var postResult = await response.Content.ReadAsAsync<ApiResult<ReceiptDto>>();
+
+        if (!postResult.IsSuccess)
+        {
+            throw new ApplicationException(postResult.Message);
+        }
+    }
 }
 

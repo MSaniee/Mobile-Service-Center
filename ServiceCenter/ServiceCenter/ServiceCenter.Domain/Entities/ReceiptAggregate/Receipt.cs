@@ -9,6 +9,7 @@ public class Receipt : BaseEntity<long>
     public MobileBrand MobileBrand { get; set; }
     public string MobileModel { get; set; }
     public string FaultDescription { get; set; }
+    public string ImageUrl { get; set; }
 
     public Guid UserId { get; set; }
     public User User { get; set; }

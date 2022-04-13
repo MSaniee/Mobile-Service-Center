@@ -1,0 +1,62 @@
+﻿@page "/createReceipt"
+@using ServiceCenter.Domain.Enums
+@using ServiceCenter.Website.Components
+
+<h2>Create Receipt Form</h2>
+
+<SuccessNotification @ref="_notification"/>
+
+<EditForm Model="_receipt" OnValidSubmit="Create" class="card card-body bg-light mt-5">
+    <DataAnnotationsValidator />
+    <div class="form-group row">
+        <label for="Imei" class="col-md-2 col-form-label">IMEI:</label>
+        <div class="col-md-10">
+            <InputText id="Imei" class="form-control" @bind-Value="_receipt.Imei" />
+            <ValidationMessage For="@(() => _receipt.Imei)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="MobileBrand" class="col-md-2 col-form-label">Brand:</label>
+        <div class="col-md-10">
+            <InputSelect id="MobileBrand" class="form-control" @bind-Value="_receipt.MobileBrand" >
+            
+                @foreach (var brand in Enum.GetValues(typeof(MobileBrand)))
+                 {
+                        <option value="@brand">@brand</option>
+                 }
+
+            </InputSelect>
+            <ValidationMessage For="@(() => _receipt.MobileBrand)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="MobileModel" class="col-md-2 col-form-label">Model:</label>
+        <div class="col-md-10">
+            <InputText id="MobileModel" class="form-control" @bind-Value="_receipt.MobileModel" />
+            <ValidationMessage For="@(() => _receipt.MobileModel)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="image" class="col-md-2 col-form-label">Image:</label>
+        <div class="col-md-10">
+            <InputText id="image" class="form-control" @bind-Value="_receipt.Image" />
+            <ValidationMessage For="@(() => _receipt.Image)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="FaultDescription" class="col-md-2 col-form-label">Fault Description:</label>
+        <div class="col-md-10">
+            <InputText id="FaultDescription" class="form-control" @bind-Value="_receipt.FaultDescription" />
+            <ValidationMessage For="@(() => _receipt.FaultDescription)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-success">Create</button>
+        </div>
+    </div>
+</EditForm>
+
+@code{
+
+}

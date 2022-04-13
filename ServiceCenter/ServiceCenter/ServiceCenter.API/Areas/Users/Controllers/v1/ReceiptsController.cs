@@ -35,9 +35,11 @@ public class ReceiptsController : BaseController
     /// <returns></returns>
     [HttpPost]
     [ActionName("")]
+    [AllowAnonymous]
     public async Task<ApiResult> Post(ReceiptDto dto, CancellationToken cancellationToken)
     {
         dto.UserId = User.Identity.GetGuidUserId();
+        dto.UserId = Guid.Parse("617c75b4-86ba-ec11-9801-50e549189de0");
 
         CreateReceiptCommand command = dto.Adapt<CreateReceiptCommand>();
 
