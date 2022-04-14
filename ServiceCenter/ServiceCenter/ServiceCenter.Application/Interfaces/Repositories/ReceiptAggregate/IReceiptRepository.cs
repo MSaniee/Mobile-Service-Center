@@ -7,5 +7,6 @@ namespace ServiceCenter.Application.Interfaces.Repositories.ReceiptAggregate;
 public interface IReceiptRepository : IRepository<Receipt>
 {
     Task<PagedList<ReceiptDto>> GetReceipts(Guid userId, Pagable pagable, CancellationToken cancellationToken);
+    Task<ReceiptDto> GetById(long id, CancellationToken cancellationToken);
 }
 

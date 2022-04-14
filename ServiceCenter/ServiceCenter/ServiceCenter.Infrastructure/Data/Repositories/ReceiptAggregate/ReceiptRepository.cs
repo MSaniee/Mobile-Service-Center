@@ -22,4 +22,9 @@ public class ReceiptRepository : Repository<Receipt>, IReceiptRepository, IScope
                           .Sort(pagable.OrderBy)
                           .ProjectToType<ReceiptDto>()
                           .ToPagedListAsync(pagable, cancellationToken);
+
+    public Task<ReceiptDto> GetById(long id, CancellationToken cancellationToken)
+    {
+        return TableNoTracking.Where(r => r.Id == id).ProjectToType<ReceiptDto>().FirstOrDefaultAsync(cancellationToken);
+    }
 }

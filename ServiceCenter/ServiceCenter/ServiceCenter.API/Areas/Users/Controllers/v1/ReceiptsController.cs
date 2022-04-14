@@ -47,6 +47,22 @@ public class ReceiptsController : BaseController
     }
 
     /// <summary>
+    /// دریافت یک قبض تعمیر
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpGet]
+    [ActionName("")]
+    [AllowAnonymous]
+    public async Task<ApiResult<ReceiptDto>> Get(long id, CancellationToken cancellationToken)
+    {
+        GetReceiptQuery query = new(id);
+
+        return await _mediator.Send(query, cancellationToken);
+    }
+
+    /// <summary>
     /// دریافت قبض های تعمیر
     /// </summary>
     /// <param name="pagable"></param>
