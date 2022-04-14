@@ -58,5 +58,27 @@ public class ReceiptService : IReceiptService
             throw new ApplicationException(postResult.Message);
         }
     }
+
+    public async Task<string> UploadImage(MultipartFormDataContent content)
+    {
+        var response = await _client.PostAsync("v1/Common/Upload", content);
+        
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new ApplicationException(response.Content.ToString());
+        }
+
+        var postResult = await response.Content.ReadAsAsync<ApiResult<string>>();
+
+        if(postResult.IsSuccess)
+        {
+            var imgUrl = Path.Combine("https://localhost:5011/", postResult.Data);
+            return postResult.Data;
+        }
+        else
+        {
+            throw new ApplicationException(postResult.Message);
+        }
+    }
 }
 

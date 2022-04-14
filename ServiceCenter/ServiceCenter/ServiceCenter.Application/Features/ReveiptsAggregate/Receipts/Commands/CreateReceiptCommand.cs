@@ -11,6 +11,7 @@ public record CreateReceiptCommand(
     MobileBrand MobileBrand,
     string MobileModel,
     string FaultDescription,
+    string ImageUrl,
     Guid UserId)
     : IRequest<SResult>;
 

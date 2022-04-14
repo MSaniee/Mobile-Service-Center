@@ -20,7 +20,7 @@ public class ReceiptDto
     public string FaultDescription { get; set; }
 
     [Required(ErrorMessage = "Image is required field")]
-    public string Image { get; set; }
+    public string ImageUrl { get; set; }
 
     public Guid? UserId { get; set; }
 }

@@ -8,5 +8,6 @@ public interface IReceiptService
 {
     Task<PagingResponse<ReceiptDto>> GetReceipts(Pagable pagable);
     Task CreateReceipt(ReceiptDto receipt);
+    Task<string> UploadImage(MultipartFormDataContent content);
 }
 

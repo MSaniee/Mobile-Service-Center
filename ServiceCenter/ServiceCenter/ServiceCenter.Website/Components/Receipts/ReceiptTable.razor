@@ -1,8 +1,10 @@
-﻿@if (Receipts.Count > 0)
+﻿@using ServiceCenter.Website.Services
+@if (Receipts.Count > 0)
 {
     <table class="table">
         <thead>
             <tr>
+                <th scope="col">Image</th>
                 <th scope="col">IMEI</th>
                 <th scope="col">Brand</th>
                 <th scope="col">Model</th>
@@ -15,9 +17,9 @@
             @foreach (var receipt in Receipts)
             {
                 <tr>
-                    @*<td>
-                        <img src="@receipt.ImageUrl" alt="product image" style="width:100px;" />
-                    </td>*@
+                    <td>
+                        <img src="@(ApiSite.url + receipt.ImageUrl)" alt="receipt image" style="width:50px;" />
+                    </td>
                     <td class="align-middle">
                         @receipt.Imei
                     </td>

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Dtos\Files\" />
     <Folder Include="Features\UserAggregate\ActivationCodes\Queries\" />
     <Folder Include="Interfaces\BackgroundJobs\" />
     <Folder Include="Interfaces\BackgroundServices\" />

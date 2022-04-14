@@ -18,4 +18,6 @@ public partial class CreateReceipt
         await ReceiptService.CreateReceipt(_receipt);
         _notification.Show();
     }
+
+    private void AssignImageUrl(string imgUrl) => _receipt.ImageUrl = imgUrl;
 }

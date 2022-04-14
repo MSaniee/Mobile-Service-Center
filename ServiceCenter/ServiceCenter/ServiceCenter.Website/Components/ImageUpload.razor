@@ -1,0 +1,8 @@
+﻿@using ServiceCenter.Website.Services
+<InputFile OnChange="@HandleSelected" multiple />
+@if (ImgUrl != null)
+{
+    <div>
+        <img src="@(ApiSite.url + ImgUrl)" style="width:300px" />
+    </div>
+}
