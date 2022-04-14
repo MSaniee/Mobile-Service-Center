@@ -79,6 +79,22 @@ public class ReceiptsController : BaseController
     }
 
     /// <summary>
+    /// حذف قبض سفارش
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpDelete]
+    [ActionName("")]
+    [AllowAnonymous]
+    public async Task<ApiResult> Delete(long id, CancellationToken cancellationToken)
+    {
+        DeleteReceiptCommad command = new(id);
+
+        return await _mediator.Send(command, cancellationToken);
+    }
+
+    /// <summary>
     /// دریافت قبض های تعمیر
     /// </summary>
     /// <param name="pagable"></param>

@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /ServiceCenter/ServiceCenter/ServiceCenter.API/wwwroot/Images/homePic.jpg
 /ServiceCenter/ServiceCenter/ServiceCenter.API/wwwroot/Images/image_2022-02-02_11-14-48.png
+*.jpg

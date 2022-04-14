@@ -10,6 +10,8 @@ public interface IReceiptService
     Task CreateReceipt(ReceiptDto receipt);
     Task<string> UploadImage(MultipartFormDataContent content);
     Task<ReceiptDto> GetReceipt(long id);
-    Task UpdateReceipt(ReceiptDto product);
+    Task UpdateReceipt(ReceiptDto receipt);
+
+    Task DeleteReceipt(long id);
 }
 

@@ -57,4 +57,11 @@ public partial class Receipts
         Pagable.OrderBy = orderBy;
         await GetReceipts();
     }
+
+    private async Task DeleteReceipt(long id)
+    {
+        await ReceiptService.DeleteReceipt(id);
+        Pagable.Page = 1;
+        await GetReceipts();
+    }
 }

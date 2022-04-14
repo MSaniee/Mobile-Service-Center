@@ -27,4 +27,10 @@ public class ReceiptRepository : Repository<Receipt>, IReceiptRepository, IScope
     {
         return TableNoTracking.Where(r => r.Id == id).ProjectToType<ReceiptDto>().FirstOrDefaultAsync(cancellationToken);
     }
+
+    public async Task DeleteReceipt(Receipt receipt, CancellationToken cancellationToken)
+    {
+        Delete(receipt);
+        await SaveChangeAsync(cancellationToken);
+    }
 }

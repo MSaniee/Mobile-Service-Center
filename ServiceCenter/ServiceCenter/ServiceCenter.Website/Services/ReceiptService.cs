@@ -118,5 +118,22 @@ public class ReceiptService : IReceiptService
             throw new ApplicationException(postResult.Message);
         }
     }
+
+    public async Task DeleteReceipt(long id)
+    {
+        var response = await _client.DeleteAsync($"v1/Users/Receipts?id={id}");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new ApplicationException(response.Content.ToString());
+        }
+
+        var postResult = await response.Content.ReadAsAsync<ApiResult>();
+
+        if (!postResult.IsSuccess)
+        {
+            throw new ApplicationException(postResult.Message);
+        }
+    }
 }
 
