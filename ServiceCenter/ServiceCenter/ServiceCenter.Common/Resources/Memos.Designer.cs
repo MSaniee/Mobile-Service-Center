@@ -142,6 +142,15 @@ namespace ServiceCenter.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to آیتم مورد نظر یافت نشد.
+        /// </summary>
+        public static string ItemNotFound {
+            get {
+                return ResourceManager.GetString("ItemNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حساب کاربری شما غیرفعال است.
         /// </summary>
         public static string UserIsNotActive {

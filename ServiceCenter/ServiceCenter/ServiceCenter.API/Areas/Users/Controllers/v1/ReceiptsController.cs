@@ -63,6 +63,22 @@ public class ReceiptsController : BaseController
     }
 
     /// <summary>
+    /// ویرایش اطلاعات قبض
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [HttpPut]
+    [ActionName("")]
+    [AllowAnonymous]
+    public async Task<ApiResult> Put(ReceiptDto dto, CancellationToken cancellationToken)
+    {
+        UpdateReceiptCommad command = dto.Adapt<UpdateReceiptCommad>();
+
+        return await _mediator.Send(command, cancellationToken);
+    }
+
+    /// <summary>
     /// دریافت قبض های تعمیر
     /// </summary>
     /// <param name="pagable"></param>

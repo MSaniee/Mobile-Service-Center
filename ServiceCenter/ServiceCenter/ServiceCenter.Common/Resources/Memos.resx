@@ -144,6 +144,9 @@
   <data name="InvalidUserNameEntered" xml:space="preserve">
     <value>نام کاربری وارد شده صحیح نیست</value>
   </data>
+  <data name="ItemNotFound" xml:space="preserve">
+    <value>آیتم مورد نظر یافت نشد</value>
+  </data>
   <data name="UserIsNotActive" xml:space="preserve">
     <value>حساب کاربری شما غیرفعال است</value>
   </data>
