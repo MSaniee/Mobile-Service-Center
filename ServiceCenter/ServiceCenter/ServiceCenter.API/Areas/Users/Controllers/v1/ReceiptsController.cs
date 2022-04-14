@@ -1,5 +1,4 @@
 ﻿using Mapster;
-using Newtonsoft.Json;
 using ServiceCenter.Application.Dtos.Receipts;
 using ServiceCenter.Application.Features.ReveiptsAggregate.Receipts.Commands;
 using ServiceCenter.Application.Features.ReveiptsAggregate.Receipts.Queries;
@@ -7,7 +6,6 @@ using ServiceCenter.Common.IdentityTools;
 using ServiceCenter.Domain.Core.Utilities.PagesSettings;
 using ServiceCenter.WebFramework.API.Utilities.PageSettings;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,11 +33,9 @@ public class ReceiptsController : BaseController
     /// <returns></returns>
     [HttpPost]
     [ActionName("")]
-    [AllowAnonymous]
     public async Task<ApiResult> Post(ReceiptDto dto, CancellationToken cancellationToken)
     {
         dto.UserId = User.Identity.GetGuidUserId();
-        dto.UserId = Guid.Parse("617c75b4-86ba-ec11-9801-50e549189de0");
 
         CreateReceiptCommand command = dto.Adapt<CreateReceiptCommand>();
 
@@ -54,7 +50,6 @@ public class ReceiptsController : BaseController
     /// <returns></returns>
     [HttpGet]
     [ActionName("")]
-    [AllowAnonymous]
     public async Task<ApiResult<ReceiptDto>> Get(long id, CancellationToken cancellationToken)
     {
         GetReceiptQuery query = new(id);
@@ -70,7 +65,6 @@ public class ReceiptsController : BaseController
     /// <returns></returns>
     [HttpPut]
     [ActionName("")]
-    [AllowAnonymous]
     public async Task<ApiResult> Put(ReceiptDto dto, CancellationToken cancellationToken)
     {
         UpdateReceiptCommad command = dto.Adapt<UpdateReceiptCommad>();
@@ -86,7 +80,6 @@ public class ReceiptsController : BaseController
     /// <returns></returns>
     [HttpDelete]
     [ActionName("")]
-    [AllowAnonymous]
     public async Task<ApiResult> Delete(long id, CancellationToken cancellationToken)
     {
         DeleteReceiptCommad command = new(id);
@@ -101,11 +94,9 @@ public class ReceiptsController : BaseController
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [HttpPost]
-    [AllowAnonymous]
     public async Task<ApiResult<PagedList<ReceiptDto>>> GetAll(Pagable pagable, CancellationToken cancellationToken)
     {
-        //Guid? userId = User.Identity.GetGuidUserId();
-        Guid? userId = Guid.Parse("617c75b4-86ba-ec11-9801-50e549189de0");
+        Guid? userId = User.Identity.GetGuidUserId();
 
         GetReceiptsQuery query = new(pagable, (Guid)userId);
         var result = await _mediator.Send(query, cancellationToken);

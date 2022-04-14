@@ -1,7 +1,9 @@
 ﻿<h3>Receipts</h3>
 @page "/Receipts"
+@using Microsoft.AspNetCore.Authorization
 @using ServiceCenter.Website.Components
 @using ServiceCenter.Website.Components.Receipts
+@attribute [Authorize]
 
 <div class="row">
     <div class="col-md-10">

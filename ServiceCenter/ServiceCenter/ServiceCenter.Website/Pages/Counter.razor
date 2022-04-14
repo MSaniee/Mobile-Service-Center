@@ -1,6 +1,17 @@
 ﻿@page "/counter"
+@using System.Security.Claims
 
 <PageTitle>Counter</PageTitle>
+
+<AuthorizeView Roles="Administrator">
+    <Authorized>
+        The @context.User.FindFirst(ClaimTypes.Name).Value is authorized
+        @*@context.User.Claims.Where("lambda expression goes here");*@ 
+   </Authorized>
+    <NotAuthorized>
+        The User is not authorized
+    </NotAuthorized>
+</AuthorizeView>
 
 <CounterPrint CurrentCount="currentCount" Title="Counter" />
 
@@ -9,8 +20,16 @@
 @code {
     private int currentCount = 0;
 
-    private void IncrementCount()
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+
+    private async Task IncrementCount()
     {
-        currentCount++;
+        var authState = await AuthState;
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
+            currentCount++;
+        else
+            currentCount--;
     }
 }
