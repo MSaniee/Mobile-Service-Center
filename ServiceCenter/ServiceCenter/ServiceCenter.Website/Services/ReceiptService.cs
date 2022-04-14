@@ -80,5 +80,43 @@ public class ReceiptService : IReceiptService
             throw new ApplicationException(postResult.Message);
         }
     }
+
+    public async Task<ReceiptDto> GetReceipt(long id)
+    {
+        var response = await _client.GetAsync($"v1/Users/Receipts?id={id}");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new ApplicationException(response.Content.ToString());
+        }
+
+        var postResult = await response.Content.ReadAsAsync<ApiResult<ReceiptDto>>();
+
+        if (postResult.IsSuccess)
+        {
+            return postResult.Data;
+        }
+        else
+        {
+            throw new ApplicationException(postResult.Message);
+        }
+    }
+
+    public async Task UpdateReceipt(ReceiptDto dto)
+    {
+        HttpResponseMessage response = await _client.PutAsJsonAsync("v1/Users/Receipts", dto);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new ApplicationException(response.Content.ToString());
+        }
+
+        var postResult = await response.Content.ReadAsAsync<ApiResult>();
+
+        if (!postResult.IsSuccess)
+        {
+            throw new ApplicationException(postResult.Message);
+        }
+    }
 }
 
